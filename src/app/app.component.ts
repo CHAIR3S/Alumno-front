@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Alumno-front';
 
-  currentUrl: string;
-
-  constructor(
-    
-  )
 }
