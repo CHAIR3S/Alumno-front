@@ -35,30 +35,23 @@ export class AlumnoService extends UnsubscribeOnDestroyAdapter{
       {headers: new HttpHeaders().append("Content-Type","application/json")});
   }
 
-  consultarAlumnoPorID(pk_alumno): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/consultarAlumnoPorID/" +  pk_alumno
+  consultarAlumnoPorID(pk_alumno : number ): Observable<Response<Alumno>> {
+    const url = "http://localhost:8081/alumno/buscarAlumnoPorId/" +  pk_alumno;
 
     return this.http.get<Response<Alumno>>(url);
   }
 
-  consultarMateriasAlumno(pk_alumno): Observable<Response<Object[]>> {
-    const url = "http://localhost:8081/alumno/consultarMateriasAlumno/" +  pk_alumno
-
-    return this.http.get<Response<Object[]>>(url);
-  }
-
-  
-  guardarAlumno(alumno: AlumnoRequest): Observable<Response<Alumno>> {
+  guardarAlumno(Alumno: AlumnoDto): Observable<Response<Alumno>> {
     const url = "http://localhost:8081/alumno/guardarAlumno"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Alumno>>(url,alumno)
+    return this.http.post<Response<Alumno>>(url, Alumno)
   }
 
-  editarAlumno(alumno: AlumnoRequest):Observable<Response<Alumno>>{
+  actualizarAlumno(Alumno : AlumnoDto):Observable<Response<Alumno>>{
+
     const url = 'http://localhost:8081/alumno/actualizarAlumno';
 
-
-    return this.http.put<Response<Alumno>>(url,alumno)
+    return this.http.put<Response<Alumno>>(url, Alumno)
   }
   
   eliminarAlumno(pk_alumno: number): Observable<number> {
@@ -67,8 +60,8 @@ export class AlumnoService extends UnsubscribeOnDestroyAdapter{
     return this.http.delete<number>(url);
   }
 
-  buscarAlumnoFiltro(filtro: AlumnoFiltroRequest): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/buscarAlumno"; 
+  buscarAlumnoFiltro(filtro: AlumnoFiltroDto): Observable<Response<Alumno>> {
+    const url = "http://localhost:8081/alumno/buscarAlumnoFiltro"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
     return this.http.post<Response<Alumno>>(url,filtro)
   }
