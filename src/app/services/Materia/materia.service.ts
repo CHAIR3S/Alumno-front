@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders , HttpRequest,  HttpEvent, HttpParams} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from "src/app/toUse/UnsubscribeOnDestroyAdapter";
 import { catchError, retry, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { Materia } from 'src/app/model/Materia';
+import { Response } from 'src/app/model/Response';
+import { MateriaDto } from 'src/app/DTO/MateriaDTO';
+import { MateriaAndFiltroDto } from 'src/app/DTO/MateriaAndFiltroDTO';
+import { MateriaFiltroDto } from 'src/app/DTO/MateriaFiltroDTO';
 
 
 @Injectable({
@@ -14,7 +18,7 @@ export class MateriaService extends  UnsubscribeOnDestroyAdapter{
   [x: string]: any;
   private readonly API_URL = "assets/data/clients.json";
   dialogData: any;
-  dataChange: BehaviorSubject<Alumno[]> = new BehaviorSubject<Alumno[]>([]);
+  dataChange: BehaviorSubject<Materia[]> = new BehaviorSubject<Materia[]>([]);
   isTblLoading = true;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,52 +30,44 @@ export class MateriaService extends  UnsubscribeOnDestroyAdapter{
     return this.dialogData;
   }
 
-  public consultarTodos():Observable<Response<Alumno>>{
-    const url = "http://localhost:8081/alumno/consultarTodos";
+  public consultarTodos():Observable<Response<Materia>>{
+    const url = "http://localhost:8081/materia/consultarTodos";
     
-    return this.http.get<Response<Alumno>>(url,
+    return this.http.get<Response<Materia>>(url,
       {headers: new HttpHeaders().append("Content-Type","application/json")});
   }
 
-  consultarAlumnoPorID(pk_alumno): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/consultarAlumnoPorID/" +  pk_alumno
+  buscarMateriaPorId(materiaId: number): Observable<Response<Materia>> {
+    const url = "http://localhost:8081/materia/buscarMateriaPorId/" +  materiaId;
 
-    return this.http.get<Response<Alumno>>(url);
+    return this.http.get<Response<Materia>>(url);
   }
-
-  consultarMateriasAlumno(pk_alumno): Observable<Response<Object[]>> {
-    const url = "http://localhost:8081/alumno/consultarMateriasAlumno/" +  pk_alumno
-
-    return this.http.get<Response<Object[]>>(url);
-  }
-
   
-  guardarAlumno(alumno: AlumnoRequest): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/guardarAlumno"; 
+  guardarMateria(materia: MateriaDto): Observable<Response<Materia>> {
+    const url = "http://localhost:8081/materia/guardarMateria"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Alumno>>(url,alumno)
+    return this.http.post<Response<Materia>>(url,materia)
   }
 
-  editarAlumno(alumno: AlumnoRequest):Observable<Response<Alumno>>{
-    const url = 'http://localhost:8081/alumno/actualizarAlumno';
+  actualizarMateria(upToDate: MateriaAndFiltroDto):Observable<Response<Materia>>{    
+    const url = 'http://localhost:8081/materia/actualizarMateria';
 
-
-    return this.http.put<Response<Alumno>>(url,alumno)
+    return this.http.put<Response<Materia>>(url,upToDate)
   }
   
-  eliminarAlumno(pk_alumno: number): Observable<number> {
-    const url = "http://localhost:8081/alumno/borrarAlumnoPorId/" +  pk_alumno
+  borrarMateriaId(idMateria: number): Observable<number> {
+    const url = "http://localhost:8081/materia/borrarMateriaId/" +  idMateria
 
     return this.http.delete<number>(url);
   }
 
-  buscarAlumnoFiltro(filtro: AlumnoFiltroRequest): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/buscarAlumno"; 
+  buscarMateriaFiltro(filtro: MateriaFiltroDto): Observable<Response<Materia>> {
+    const url = "http://localhost:8081/materia/buscarMateriaFiltro"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Alumno>>(url,filtro)
+    return this.http.post<Response<Materia>>(url,filtro)
   }
 
-  get data(): Alumno[] {
+  get data(): Materia[] {
     return this.dataChange.value;
   }
 }
