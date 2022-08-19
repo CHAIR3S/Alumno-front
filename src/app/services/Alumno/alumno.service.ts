@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpRequest,  HttpEvent, HttpParams} from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
-import { UnsubscribeOnDestroyAdapter } from '../shared/UnsubscribeOnDestroyAdapter';
+import { UnsubscribeOnDestroyAdapter } from "src/app/toUse/UnsubscribeOnDestroyAdapter";
 import { Alumno } from '../../model/Alumno';
 import { Response } from "../../model/Response";
 import { AlumnoFiltroDto } from '../../DTO/AlumnoFiltroDTO';
 import { AlumnoDto } from '../../DTO/AlumnoDTO';
+import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -35,27 +36,27 @@ export class AlumnoService extends UnsubscribeOnDestroyAdapter{
       {headers: new HttpHeaders().append("Content-Type","application/json")});
   }
 
-  consultarAlumnoPorID(pk_alumno : number ): Observable<Response<Alumno>> {
-    const url = "http://localhost:8081/alumno/buscarAlumnoPorId/" +  pk_alumno;
+  consultarAlumnoPorID(alumnoId: number ): Observable<Response<Alumno>> {
+    const url = "http://localhost:8081/alumno/buscarAlumnoPorId/" +  alumnoId;
 
     return this.http.get<Response<Alumno>>(url);
   }
 
-  guardarAlumno(Alumno: AlumnoDto): Observable<Response<Alumno>> {
+  guardarAlumno(alumno: AlumnoDto): Observable<Response<Alumno>> {
     const url = "http://localhost:8081/alumno/guardarAlumno"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Alumno>>(url, Alumno)
+    return this.http.post<Response<Alumno>>(url, alumno)
   }
 
-  actualizarAlumno(Alumno : AlumnoDto):Observable<Response<Alumno>>{
+  actualizarAlumno(upToDate: AlumnoAndFiltroDto):Observable<Response<Alumno>>{
 
     const url = 'http://localhost:8081/alumno/actualizarAlumno';
 
-    return this.http.put<Response<Alumno>>(url, Alumno)
+    return this.http.put<Response<Alumno>>(url, upToDate)
   }
   
-  eliminarAlumno(pk_alumno: number): Observable<number> {
-    const url = "http://localhost:8081/alumno/borrarAlumnoPorId/" +  pk_alumno
+  eliminarAlumno(idAlumno: number): Observable<number> {
+    const url = "http://localhost:8081/alumno/borrarAlumnoId/" +  idAlumno;
 
     return this.http.delete<number>(url);
   }
