@@ -1,0 +1,74 @@
+<div (click)="deploy(true)" [ngClass]="this.res ? 'sidebar' : 'active'">
+    <div class="logo_content">
+        <div class="logo">
+            <i class='bx bxs-user-circle'></i>
+            <div class="logo_name">
+                Control Escolar
+            </div>
+        </div>
+        <i class='bx bx-menu' id="btn" (onclick)="deploy(false)"></i>
+    </div>
+    <ul class="nav_list">
+        <li>
+            <a href="#">
+                <i class='bx bxs-home'></i>
+                <span class="links_name"> Inicio </span>
+            </a>
+            <span class="react"> Inicio </span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-chalkboard'></i>
+                <span class="links_name"> Administración </span>
+            </a>
+            <span class="react"> Administración </span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-clipboard'></i>
+                <span class="links_name"> Profesores </span>
+            </a>
+            <span class="react"> Profesores </span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-user-plus'></i>
+                <span class="links_name"> Alta de usuarios </span>
+            </a>
+            <span class="react"> Alta de usuarios </span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+
+                <img src="assets/Image mia.jpg" alt="">
+
+                <div class="name_role">
+                    <div class="name">
+                        Luis Chaires
+                    </div>
+                    <div class="role">
+                        Web Designer
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="logout"></i>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <!-- <script>
+
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+    
+        btn.onclick = function() {
+          sidebar.classList.toggle("active");
+        }
+        
+    </script> -->
+
+</div>
+
