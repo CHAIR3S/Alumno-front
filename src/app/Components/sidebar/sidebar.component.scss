@@ -35,17 +35,19 @@ body{
 }
 
  .logo_content .logo {
-
     color: white;
     display: flex;
     align-items: center;
     width: 150;
     height: 200;
-
+    opacity: 1;
+    pointer-events: none;
+    transition: all 0.5s ease;
 }
 
 .active .logo_content .logo {
-
+    opacity: 0;
+    pointer-events: none;
 }
 
 .logo_content .logo i{
@@ -70,7 +72,10 @@ body{
     text-align: center;
     line-height: 25px;
     transform: translateX(-20%);
+}
 
+.active #btn {
+    left: 30%;
 }
 
  ul{
@@ -102,6 +107,12 @@ body{
     transition: 0s;
     opacity: 0;
     pointer-events: none;
+    display: none;
+}
+
+.active ul li .react{
+    display: block;
+    transform: translate(-50%, -70%);
 }
 
  ul li:hover .react{ 
@@ -110,7 +121,7 @@ body{
     transition: all 0.5s ease;
 }
 
- ul li a{
+ul li a{
     color: white;
     align-items: center;
     display: flex;
@@ -119,12 +130,18 @@ body{
     border-radius: 12px;
 }
 
- ul li a:hover{
+ul li a:hover{
     color: purple;
     background: rgb(255, 255, 255);
+    pointer-events: auto;
 }
 
- ul li a i{
+.active ul li .links_name {
+    display: none;
+    pointer-events: none;
+}
+
+ul li a i{
     font-weight: 200;
     margin: 10px;
     height: 20px;
@@ -133,6 +150,10 @@ body{
     line-height: 18px;
     text-align: center;
     font-size: 25px;
+}
+
+.active ul li a i{
+    text-align: initial;
 }
 
 .profile_content{
@@ -157,6 +178,14 @@ body{
 .profile_content .profile .profile_details{
     display: flex;
     align-items: center;
+    opacity: 1;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+.active .profile_content .profile .profile_details{
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .profile_content .profile .profile_details img{
@@ -179,7 +208,7 @@ body{
     font-size: 13px;
 }
 
-.profile_content .profile .profile_details #logout{
+#logout{
     position: absolute;
     bottom: 3px;
     left: 88%;
@@ -189,6 +218,7 @@ body{
     border-radius: 12%;
 }
 
-.hide{
-    display: none;
+.active #logout{
+    visibility: visible;
+    left: 50%;
 }
