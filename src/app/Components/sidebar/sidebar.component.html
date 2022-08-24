@@ -1,4 +1,4 @@
-<div (click)="deploy(true)" [ngClass]="this.res ? 'sidebar' : 'active'">
+<div [ngClass]="this.res ? 'sidebar' : 'active'">
     <div class="logo_content">
         <div class="logo">
             <i class='bx bxs-user-circle'></i>
@@ -6,7 +6,8 @@
                 Control Escolar
             </div>
         </div>
-        <i class='bx bx-menu' id="btn" (onclick)="deploy(false)"></i>
+            <i class='bx bx-menu' id="btn" (click)="change()"></i>
+        
     </div>
     <ul class="nav_list">
         <li>

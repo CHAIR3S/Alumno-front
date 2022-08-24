@@ -15,8 +15,9 @@ export class SidebarComponent implements OnInit{
 
   }
 
-  deploy(res: boolean){
-    res = res;
+  change(){
+    this.res=!this.res;
+    console.log(this.res);
   }
 
 }
