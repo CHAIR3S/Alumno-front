@@ -3,7 +3,7 @@ import { MateriaFiltroDto } from "./MateriaFiltroDTO";
 
 export class MateriaAndFiltroDto{
 
-    filtro: MateriaFiltroDto;
-    MateriaUpdate: MateriaDto;
+    filtro?: MateriaFiltroDto;
+    MateriaUpdate?: MateriaDto;
     
 }

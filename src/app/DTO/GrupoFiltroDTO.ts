@@ -1,6 +1,6 @@
 export class GrupoFiltroDto{
 
-	id: Number;
-    grupo: String;
+	id?: Number;
+    grupo?: String;
 
 }

@@ -17,7 +17,6 @@ export class SidebarComponent implements OnInit{
 
   change(){
     this.res=!this.res;
-    console.log(this.res);
   }
 
 }

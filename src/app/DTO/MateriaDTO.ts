@@ -1,9 +1,9 @@
 export class MateriaDto {
 
-	clave: String;
-	nombre: String;
+	clave?: String;
+	nombre?: String;
 	// El id de estatus
-	estatus: number;
+	estatus?: number;
 	//El id de ciclo
-	ciclo: number;
+	ciclo?: number;
 }

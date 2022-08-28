@@ -3,7 +3,7 @@ import { AlumnoFiltroDto } from './AlumnoFiltroDTO';
 
 export class AlumnoAndFiltroDto{
 
-    alumnoUpdate: AlumnoDto;
-    filtro: AlumnoFiltroDto;
+    alumnoUpdate?: AlumnoDto;
+    filtro?: AlumnoFiltroDto;
 
 }

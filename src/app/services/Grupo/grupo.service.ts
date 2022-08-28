@@ -10,16 +10,16 @@ import {
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Grupo } from '../../model/Grupo';
-import { Response } from '../../model/Response';
+import { ResponseGC } from '../../model/ResponseGC';
 import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
 import { Ciclo } from '../../model/Ciclo';
-import { UnsubscribeOnDestroyAdapter } from 'src/app/toUse/UnsubscribeOnDestroyAdapter';
+// import { UnsubscribeOnDestroyAdapter } from 'src/app/toUse/UnsubscribeOnDestroyAdapter';
 import { GrupoFiltroDto } from 'src/app/DTO/GrupoFiltroDTO';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GrupoService extends UnsubscribeOnDestroyAdapter {
+export class GrupoService {
   private readonly API_URL = 'assets/data/clients.json';
   dialogData: any;
   dataChange: BehaviorSubject<Grupo[]> = new BehaviorSubject<Grupo[]>([]);
@@ -29,21 +29,21 @@ export class GrupoService extends UnsubscribeOnDestroyAdapter {
   };
 
   constructor(private http: HttpClient) {
-    super();
+
   }
 
-  consultarTodos(): Observable<Response<Grupo>> {
+  consultarTodos(): Observable<ResponseGC<Grupo>> {
     const url = 'http://localhost:8081/grupo/consultarTodos';
 
-    return this.http.get<Response<Grupo>>(url, {
+    return this.http.get<ResponseGC<Grupo>>(url, {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     });
   }
 
-  buscarGrupoFiltro(filtro: GrupoFiltroDto): Observable<Response<Grupo>> {
+  buscarGrupoFiltro(filtro: GrupoFiltroDto): Observable<ResponseGC<Grupo>> {
     const url = 'http://localhost:8081/grupo/buscarGrupoFiltro';
     //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Grupo>>(url, filtro);
+    return this.http.post<ResponseGC<Grupo>>(url, filtro);
   }
 
   get data(): Grupo[] {

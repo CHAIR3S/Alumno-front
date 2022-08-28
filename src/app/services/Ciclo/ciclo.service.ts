@@ -4,18 +4,17 @@ import { BehaviorSubject } from "rxjs";
 import { HttpClient, HttpHeaders , HttpRequest,  HttpEvent, HttpParams,HttpErrorResponse} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
-import { UnsubscribeOnDestroyAdapter } from "src/app/toUse/UnsubscribeOnDestroyAdapter";
 
 
 import {Ciclo }from "../../model/Ciclo";
-import {Response} from "../../model/Response";
+import {ResponseGC} from "../../model/ResponseGC";
 import { CicloFiltroDto } from '../../DTO/CicloFiltroDTO';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CicloService extends UnsubscribeOnDestroyAdapter {
+export class CicloService {
   private readonly API_URL = "assets/data/clients.json";
   dialogData: any;
   dataChange: BehaviorSubject<Ciclo[]> = new BehaviorSubject<Ciclo[]>([]);
@@ -26,23 +25,23 @@ export class CicloService extends UnsubscribeOnDestroyAdapter {
 
   ciclo = new Ciclo();
 
-  constructor(private http:HttpClient) {super(); }
+  constructor(private http:HttpClient) {}
     
   getDialogData() {
     return this.dialogData;
   }
 
-  public consultarTodos():Observable<Response<Ciclo>>{
+  public consultarTodos():Observable<ResponseGC<Ciclo>>{
     const url = "http://localhost:8081/ciclo/consultarTodos";
     
-    return this.http.get<Response<Ciclo>>(url,
+    return this.http.get<ResponseGC<Ciclo>>(url,
       {headers: new HttpHeaders().append("Content-Type","application/json")});
   }
 
-  guardarCiclo(ciclo: Ciclo): Observable<Response<Ciclo>> {
+  guardarCiclo(ciclo: Ciclo): Observable<ResponseGC<Ciclo>> {
     const url = "http://localhost:8081/ciclo/guardarCiclo"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Ciclo>>(url,ciclo)
+    return this.http.post<ResponseGC<Ciclo>>(url,ciclo)
   }
   
   borrarCicloId(idCiclo: number): Observable<number> {
@@ -51,10 +50,10 @@ export class CicloService extends UnsubscribeOnDestroyAdapter {
     return this.http.delete<number>(url);
   }
 
-  buscarCicloFiltro(filtro: CicloFiltroDto): Observable<Response<Ciclo>> {
+  buscarCicloFiltro(filtro: CicloFiltroDto): Observable<ResponseGC<Ciclo>> {
     const url = "http://localhost:8081/ciclo/buscarCicloFiltro"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.post<Response<Ciclo>>(url,filtro)
+    return this.http.post<ResponseGC<Ciclo>>(url,filtro)
   }
 
   get data(): Ciclo[] {
