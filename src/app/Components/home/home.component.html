@@ -1,3 +1,32 @@
 <div class="base">
-    DATA: {{ alumno | json }}
+    <div class="header">
+        <div class="data">
+            <ul class="list">
+                <li class="title">
+                    Id: <span class="variable"> {{alumno.id}}</span>
+                </li>
+                <li class="list">
+                    Expediente: <span class="variable">
+                        {{alumno.expediente}}
+                    </span>
+                </li>
+                <li class="list">
+                    Nombre: <span class="variable">
+                        {{alumno.apePaterno}} {{alumno.apeMaterno}} {{alumno.nombre}}
+                    </span>
+                </li><li class="list">
+                    CURP: <span class="variable">
+                        {{alumno.curp}}
+                    </span>
+                </li><li class="list">
+                    Sexo: <span class="variable">
+                        {{alumno.genero}}
+                    </span>
+                </li><li class="list">
+                    Estatus: <span class="variable">
+                        {{alumno.estatus.estatus}}
+                    </span>
+            </ul>
+        </div>
+    </div>
 </div>

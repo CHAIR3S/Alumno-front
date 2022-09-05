@@ -2,7 +2,7 @@
 
 export class Status{
 
-    pk_status?: number;
-    txt_status?: String;
+    id?: number;
+    estatus?: String;
     
 }

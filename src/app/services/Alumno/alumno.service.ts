@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 
 import { HttpClient, HttpHeaders , HttpRequest,  HttpEvent, HttpParams} from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
@@ -14,6 +14,7 @@ import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
   providedIn: 'root'
 })
 export class AlumnoService {
+  @Output() dataAlumno: EventEmitter<any> = new EventEmitter();
   [x: string]: any;
   private readonly API_URL = "assets/data/clients.json";
   dialogData: any;

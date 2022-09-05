@@ -1,3 +1,4 @@
+import { AlumnoDto } from './../../DTO/AlumnoDTO';
 import { Alumno } from '../../model/Alumno';
 import { AlumnoService } from '../../services/Alumno/alumno.service'
 import { ActivatedRoute } from '@angular/router';
@@ -11,12 +12,14 @@ import { ResponseGC } from '../../model/ResponseGC';
 })
 export class HomeComponent implements OnInit {
 
-  alumno : Alumno = new Alumno();
+  alumno: Alumno = new Alumno();
+  numer: number = 5;
   public id: any;
+
 
   constructor(
     private route:ActivatedRoute,
-    public alumnoService: AlumnoService) { }
+    private alumnoService: AlumnoService) { }
 
   ngOnInit(): void {
     
@@ -26,39 +29,16 @@ export class HomeComponent implements OnInit {
       idAlumno = params.id;
 
       this.consultarAlumnoPorId(idAlumno);
-
-      console.log(params.id);
-      console.log(idAlumno)
-      console.log(this.alumno);
     })
 
-  
-    // this.consultarAlumnoPorID();
+    
+    this.alumnoService.dataAlumno.emit({
+      data: this.numer
+    })
+
   }
 
-  // public consultarAlumnoPorId(){
-  //   this.alumnoService.consultarAlumnoPorID(alumnoId).subscribe(Response => {
-  //     console.log(Response);
-  //     // this.data = Response.data;
-  //   },
-  //   error => {console.error(error)}
-  //   );
-  // }
 
-  // consultarAlumnoPorID(){
-  //   this.route.params.subscribe( params =>{
-  //     let alumnoId = params['pk_alumno']
-
-  //       this.alumnoService.consultarAlumnoPorID(alumnoId).subscribe(
-  //         (response) => {
-  //             if(response.status === 'OK'){
-  //               // response.data;
-  //               console.log(response.data);
-  //             }
-  //         }
-  //       )
-  //     }) 
-  //   }
 
   consultarAlumnoPorId(idAlumno: number){
     this.alumnoService.consultarAlumnoPorID(idAlumno).subscribe(ResponseGC =>{
