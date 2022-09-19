@@ -1,5 +1,10 @@
 <div class="base">
     <div class="header">
+        <span>
+            {{alumno.apePaterno}}
+            {{alumno.apeMaterno}}
+            {{alumno.nombre}}
+        </span>
         <div class="data">
             <ul class="list">
                 <li class="title">
@@ -11,22 +16,76 @@
                     </span>
                 </li>
                 <li class="list">
-                    Nombre: <span class="variable">
-                        {{alumno.apePaterno}} {{alumno.apeMaterno}} {{alumno.nombre}}
-                    </span>
-                </li><li class="list">
                     CURP: <span class="variable">
                         {{alumno.curp}}
                     </span>
-                </li><li class="list">
+                </li>
+                <li class="list">
                     Sexo: <span class="variable">
                         {{alumno.genero}}
                     </span>
-                </li><li class="list">
+                </li>
+                <li class="list">
                     Estatus: <span class="variable">
                         {{alumno.estatus.estatus}}
                     </span>
             </ul>
         </div>
+    </div>
+
+    <div class="grades">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Clave
+                    </th>
+                    <th>
+                        Ciclo
+                    </th>
+                    <th>
+                        Materia
+                    </th>
+                    <th>
+                        Cal. 1
+                    </th>
+                    <th>
+                        Cal. 2
+                    </th>
+                    <th>
+                        Cal. 3
+                    </th>
+                    <th>
+                        Promedio
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                        {{calificacion.pk_calificacion}}
+                    </th>
+                    <th>
+                        2
+                    </th>
+                    <th>
+                        3
+                    </th>
+                    <th>
+                        4
+                    </th>
+                    <th>
+                        5
+                    </th>
+                    <th>
+                        6
+                    </th>
+                    <th>
+                        7
+                    </th>
+
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

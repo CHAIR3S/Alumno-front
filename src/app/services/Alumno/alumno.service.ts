@@ -14,7 +14,9 @@ import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
   providedIn: 'root'
 })
 export class AlumnoService {
+
   @Output() dataAlumno: EventEmitter<any> = new EventEmitter();
+
   [x: string]: any;
   private readonly API_URL = "assets/data/clients.json";
   dialogData: any;

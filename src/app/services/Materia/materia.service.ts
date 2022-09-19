@@ -37,8 +37,8 @@ export class MateriaService {
       {headers: new HttpHeaders().append("Content-Type","application/json")});
   }
 
-  buscarMateriaPorId(materiaId: number): Observable<ResponseGC<Materia>> {
-    const url = "http://localhost:8081/materia/buscarMateriaPorId/" +  materiaId;
+  buscarMateriaPorId(idMateria: number): Observable<ResponseGC<Materia>> {
+    const url = "http://localhost:8081/materia/buscarMateriaPorId/" +  idMateria;
 
     return this.http.get<ResponseGC<Materia>>(url);
   }
@@ -65,6 +65,12 @@ export class MateriaService {
     const url = "http://localhost:8081/materia/buscarMateriaFiltro"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
     return this.http.post<ResponseGC<Materia>>(url,filtro)
+  }
+
+  buscarMateriasPorIds(materiasIds: number[]): Observable<ResponseGC<Materia>> {
+    const url = "http://localhost:8081/materia/buscarMateriasIds"; 
+                                  //Url y body: objeto que contiene de lo que queremos crear
+    return this.http.post<ResponseGC<Materia>>(url,materiasIds)
   }
 
   get data(): Materia[] {
