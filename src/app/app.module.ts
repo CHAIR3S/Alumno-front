@@ -7,13 +7,15 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CalificacionesComponent } from './Components/calificaciones/calificaciones.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     HomeComponent,
-    AdministracionComponent
+    AdministracionComponent,
+    CalificacionesComponent
   ],
   imports: [
     BrowserModule,

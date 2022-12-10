@@ -18,12 +18,9 @@ import { Calificacion } from 'src/app/model/Calificacion';
 export class HomeComponent implements OnInit {
 
   response: ResponseGC<Alumno> = new ResponseGC();
-  calificaciones: Calificacion[] = [];
-  calificacion: Calificacion = new Calificacion();
-  materias: Materia[] = [];
+  calificaciones: Array <Calificacion> = new Array;
   alumno: Alumno = new Alumno;
   public id: any;
-  i: number = 0;
 
 
   constructor(
@@ -53,12 +50,12 @@ export class HomeComponent implements OnInit {
 
     //  }
 
-     setTimeout(() => {
-      this.alumnoService.dataAlumno.emit({
-        data: this.alumno
-      })
-      this.calificacion = this.calificaciones[3];
-     }, 1500);
+    //  setTimeout(() => {
+    //   this.alumnoService.dataAlumno.emit({
+    //     data: this.alumno
+    //   })
+    //   this.calificacion = this.calificaciones[3];
+    //  }, 1500);
 
   }
 
@@ -73,8 +70,8 @@ export class HomeComponent implements OnInit {
 
   consultarCalificacionesAlumno(idAlumno: number){
     this.calificacionService.buscarCalificacionAlumno(idAlumno).subscribe( ResponseGC => {
-      this.calificaciones = ResponseGC.list;
-      console.log(this.calificaciones);
+      let calificaciones = ResponseGC.list;
+      console.log(calificaciones);
       
     },
     error =>{ console.error(error)}

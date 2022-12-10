@@ -63,7 +63,7 @@
             <tbody>
                 <tr>
                     <th>
-                        {{calificacion.pk_calificacion}}
+                        2
                     </th>
                     <th>
                         2
@@ -87,5 +87,11 @@
                 </tr>
             </tbody>
         </table>
+
+        <ul>
+            <li *ngFor = "let Calificacion of calificaciones">
+                {{Calificacion}}
+            </li> 
+        </ul>
     </div>
 </div>
