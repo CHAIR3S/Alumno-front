@@ -1,0 +1,67 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Clave
+            </th>
+            <th>
+                Ciclo
+            </th>
+            <th>
+                Materia
+            </th>
+            <th>
+                Cal. I
+            </th>
+            <th>
+                Cal. II
+            </th>
+            <th>
+                Cal. III
+            </th>
+            <th>
+                Promedio
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.materia.clave}}
+                </li> 
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.materia.ciclo.periodo.periodo}}
+                </li>
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.materia.nombre}}
+                </li> 
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.cal1}}
+                </li> 
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.cal2}}
+                </li> 
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.cal3}}
+                </li> 
+            </th>
+            <th>
+                <li *ngFor = "let Calificacion of calificionesList">
+                    {{Calificacion.promedio}}
+                </li> 
+            </th>
+
+        </tr>
+    </tbody>
+</table>

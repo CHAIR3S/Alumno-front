@@ -10,5 +10,7 @@ export class Calificacion{
     cal3: number = 0;
     alumno: Alumno = new Alumno;
     materia: Materia = new Materia;
+    promedio: number = 0;//promedioFuncion(this.cal1, this.cal2, this.cal3);
 
 }
+

@@ -8,6 +8,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CalificacionesComponent } from './Components/calificaciones/calificaciones.component';
+import { MateriasTablaComponent } from './Components/home/materias-tabla/materias-tabla.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CalificacionesComponent } from './Components/calificaciones/calificacio
     SidebarComponent,
     HomeComponent,
     AdministracionComponent,
-    CalificacionesComponent
+    CalificacionesComponent,
+    MateriasTablaComponent
   ],
   imports: [
     BrowserModule,

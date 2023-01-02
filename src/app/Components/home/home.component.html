@@ -34,64 +34,6 @@
     </div>
 
     <div class="grades">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Clave
-                    </th>
-                    <th>
-                        Ciclo
-                    </th>
-                    <th>
-                        Materia
-                    </th>
-                    <th>
-                        Cal. 1
-                    </th>
-                    <th>
-                        Cal. 2
-                    </th>
-                    <th>
-                        Cal. 3
-                    </th>
-                    <th>
-                        Promedio
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>
-                        2
-                    </th>
-                    <th>
-                        2
-                    </th>
-                    <th>
-                        3
-                    </th>
-                    <th>
-                        4
-                    </th>
-                    <th>
-                        5
-                    </th>
-                    <th>
-                        6
-                    </th>
-                    <th>
-                        7
-                    </th>
-
-                </tr>
-            </tbody>
-        </table>
-
-        <ul>
-            <li *ngFor = "let Calificacion of calificaciones">
-                {{Calificacion}}
-            </li> 
-        </ul>
+        <app-materias-tabla [calificionesList] = "calificaciones"></app-materias-tabla>
     </div>
 </div>
