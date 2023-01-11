@@ -1,31 +1,31 @@
-<div class="base">
+<div [ngClass]="this.alumnoService.change ? 'base' : 'active'">
     <div class="header">
-        <span>
+        <span class="fullName">
             {{alumno.apePaterno}}
             {{alumno.apeMaterno}}
             {{alumno.nombre}}
         </span>
         <div class="data">
             <ul class="list">
-                <li class="title">
+                <li>
                     Id: <span class="variable"> {{alumno.id}}</span>
                 </li>
-                <li class="list">
+                <li>
                     Expediente: <span class="variable">
                         {{alumno.expediente}}
                     </span>
                 </li>
-                <li class="list">
+                <li>
                     CURP: <span class="variable">
                         {{alumno.curp}}
                     </span>
                 </li>
-                <li class="list">
+                <li>
                     Sexo: <span class="variable">
                         {{alumno.genero}}
                     </span>
                 </li>
-                <li class="list">
+                <li>
                     Estatus: <span class="variable">
                         {{alumno.estatus.estatus}}
                     </span>

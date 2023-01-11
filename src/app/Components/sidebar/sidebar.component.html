@@ -1,5 +1,7 @@
 
-<div class="body"></div>
+<div class="body">
+    <router-outlet></router-outlet>
+</div>
 <div [ngClass]="this.res ? 'sidebar' : 'active'">
     <div class="logo_content">
         <div class="logo">
@@ -13,21 +15,21 @@
     </div>
     <ul class="nav_list">
         <li>
-            <a href="#">
+            <a href="6">
                 <i class='bx bxs-home'></i>
                 <span class="links_name"> Inicio </span>
             </a>
             <span class="react"> Inicio </span>
         </li>
         <li>
-            <a href="/admin">
+            <a href="6/admin">
                 <i class='bx bx-chalkboard'></i>
                 <span class="links_name"> Administración </span>
             </a>
             <span class="react"> Administración </span>
         </li>
         <li>
-            <a href="#">
+            <a href="6/profesores">
                 <i class='bx bx-clipboard'></i>
                 <span class="links_name"> Profesores </span>
             </a>
@@ -49,7 +51,7 @@
 
                 <div class="name_role">
                     <div class="name">
-                        Luis Chaires
+                        {{alumnoService.nombreUsuario}}
                     </div>
                     <div class="role">
                         Web Designer

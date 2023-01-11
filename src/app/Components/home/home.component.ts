@@ -20,12 +20,13 @@ export class HomeComponent implements OnInit {
   response: ResponseGC<Alumno> = new ResponseGC();
   calificaciones: Array <Calificacion> = new Array;
   alumno: Alumno = new Alumno;
+  nombre: String = '';
   public id: any;
 
 
   constructor(
     private route:ActivatedRoute,
-    private alumnoService: AlumnoService,
+    public alumnoService: AlumnoService,
     private calificacionService: CalificacionService,
     private materiaService: MateriaService) { }
 
@@ -48,6 +49,8 @@ export class HomeComponent implements OnInit {
   consultarAlumnoPorId(idAlumno: number) {
     this.alumnoService.consultarAlumnoPorID(idAlumno).subscribe( ResponseGC => {
       this.alumno = ResponseGC.data;
+      this.nombre = this.alumno.nombre;
+      this.alumnoService.nombreUsuario = this.nombre;
     },
     error=>{console.error(error)}
     
@@ -57,7 +60,6 @@ export class HomeComponent implements OnInit {
   consultarCalificacionesAlumno(idAlumno: number){
     this.calificacionService.buscarCalificacionAlumno(idAlumno).subscribe( ResponseGC => {
       this.calificaciones = ResponseGC.list;
-      console.log(this.calificaciones);
 
       for(let contador = 0; contador<this.calificaciones.length; contador++){
         let cal1, cal2, cal3;

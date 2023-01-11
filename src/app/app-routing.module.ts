@@ -1,3 +1,4 @@
+import { ProfesoresComponent } from './Components/profesores/profesores.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HomeComponent } from './Components/home/home.component';
 import { NgModule, Component } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: ':id/admin',
     component: AdministracionComponent
+  },
+  {
+    path: ':id/profesores',
+    component: ProfesoresComponent
   }
 ];
 

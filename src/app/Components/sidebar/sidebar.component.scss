@@ -7,8 +7,8 @@
 } 
 
 .body{
-    position: fixed;
-    width: 100%;
+    position: absolute;
+    width: 98.9%;
     height: 100%;
     top: 0;
     background-color: #fff0ff;
@@ -22,7 +22,7 @@
     width: 240px;
     background: purple;
     padding: 10px 14px;
-    transition: 0.5s ease;
+    transition: 0.4s ease;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-top-right-radius: 5px;
 }
@@ -133,7 +133,7 @@ ul li a{
     align-items: center;
     display: flex;
     text-decoration: none;
-    transition: all 0.4s ease;
+    transition: all .4s ease;
     border-radius: 12px;
 }
 
@@ -147,6 +147,7 @@ ul li a:hover{
     display: none;
     pointer-events: none;
 }
+
 
 ul li a i{
     font-weight: 200;
