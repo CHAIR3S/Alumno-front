@@ -4,8 +4,8 @@ import { Status } from "./Status";
 
 export class Materia{
 
-    clave: String = '';
-    nombre: String = '';
+    clave: string = '';
+    nombre: string = '';
     estatus: Status = new Status;
     ciclo: Ciclo = new Ciclo;
     

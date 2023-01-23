@@ -1,8 +1,7 @@
-
 <div class="body">
-    <router-outlet></router-outlet>
+    <app-display></app-display>
 </div>
-<div [ngClass]="this.res ? 'sidebar' : 'active'">
+<div [ngClass]="this.alumnoService.res ? 'sidebar' : 'active'">
     <div class="logo_content">
         <div class="logo">
             <i class='bx bxs-user-circle'></i>
@@ -10,26 +9,26 @@
                 Control Escolar
             </div>
         </div>
-            <i class='bx bx-menu' id="btn" (click)="change()"></i>
+            <i class='bx bx-menu' id="btn" (click)="this.alumnoService.change()"></i>
         
     </div>
     <ul class="nav_list">
         <li>
-            <a href="6">
+            <a href="home/6">
                 <i class='bx bxs-home'></i>
                 <span class="links_name"> Inicio </span>
             </a>
             <span class="react"> Inicio </span>
         </li>
         <li>
-            <a href="6/admin">
+            <a href="admin">
                 <i class='bx bx-chalkboard'></i>
                 <span class="links_name"> Administración </span>
             </a>
             <span class="react"> Administración </span>
         </li>
         <li>
-            <a href="6/profesores">
+            <a href="profesores">
                 <i class='bx bx-clipboard'></i>
                 <span class="links_name"> Profesores </span>
             </a>

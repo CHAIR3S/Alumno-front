@@ -1,4 +1,4 @@
-import { ProfesoresComponent } from './Components/profesores/profesores.component';
+import { TablaProfesoresComponent } from './Components/profesores/tabla-profesores/tabla-profesores.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HomeComponent } from './Components/home/home.component';
 import { NgModule, Component } from '@angular/core';
@@ -6,16 +6,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: 'home/:id',
     component: HomeComponent
   },
   {
-    path: ':id/admin',
+    path: 'admin',
     component: AdministracionComponent
   },
   {
-    path: ':id/profesores',
-    component: ProfesoresComponent
+    path: 'profesores',
+    component: TablaProfesoresComponent
   }
 ];
 

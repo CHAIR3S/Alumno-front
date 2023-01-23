@@ -16,7 +16,7 @@ import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
 export class AlumnoService {
 
   nombreUsuario: String = '';
-  change:boolean = true;
+  res: boolean = true;
 
   [x: string]: any;
   private readonly API_URL = "assets/data/clients.json";
@@ -28,6 +28,10 @@ export class AlumnoService {
   };
 
   constructor(private http:HttpClient) {
+  }
+
+  change(){
+    this.res = !this.res;
   }
     
   getDialogData() {

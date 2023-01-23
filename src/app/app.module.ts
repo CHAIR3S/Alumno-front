@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { DisplayComponent } from './Components/displayComponents/display/display.component';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,12 +9,14 @@ import { HomeComponent } from './Components/home/home.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MateriasTablaComponent } from './Components/home/materias-tabla/materias-tabla.component';
-import { ProfesoresComponent } from './Components/profesores/profesores.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { TablaProfesoresComponent } from './Components/profesores/tabla-profesores/tabla-profesores.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { MatInputModule } from '@angular/material/input';
     HomeComponent,
     AdministracionComponent,
     MateriasTablaComponent,
-    ProfesoresComponent,
+    TablaProfesoresComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,14 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,6 @@ import { HomeComponent } from './../home/home.component';
 import { Alumno } from 'src/app/model/Alumno';
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
 import { Component, OnInit, OnChanges, Input, Host } from '@angular/core';
-import { parseHostBindings } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   response: ResponseGC<Alumno> = new ResponseGC();
-  res: boolean = true;
   alumno: Alumno = new Alumno();
 
   constructor(
@@ -25,9 +23,5 @@ export class SidebarComponent implements OnInit {
   
   }
 
-  change() {
-    this.res = !this.res;
-    this.alumnoService.change = this.res;
-  }
 
 }

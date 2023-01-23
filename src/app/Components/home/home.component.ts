@@ -1,13 +1,13 @@
-import { Materia } from './../../model/Materia';
-import { MateriaService } from './../../services/Materia/materia.service';
+import { ProfesorService } from './../../services/Profesor/profesor.service';
 import { CalificacionService } from './../../services/Calificacion/calificacion.service';
-import { AlumnoDto } from './../../DTO/AlumnoDTO';
 import { Alumno } from '../../model/Alumno';
 import { AlumnoService } from '../../services/Alumno/alumno.service'
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, Injectable, OnChanges, SimpleChanges, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ResponseGC } from '../../model/ResponseGC';
 import { Calificacion } from 'src/app/model/Calificacion';
+import { UserData } from '../../model/UserData';
+import { Profesor } from 'src/app/model/Profesor';
 
 
 @Component({
@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
   calificaciones: Array <Calificacion> = new Array;
   alumno: Alumno = new Alumno;
   nombre: String = '';
+  arrayUserData: Array<UserData> = new Array();
+  arrayProfesores: Array<Profesor> = new Array();
+
   public id: any;
 
 
@@ -28,7 +31,7 @@ export class HomeComponent implements OnInit {
     private route:ActivatedRoute,
     public alumnoService: AlumnoService,
     private calificacionService: CalificacionService,
-    private materiaService: MateriaService) { }
+    private profesorService: ProfesorService) { }
 
   ngOnInit(): void {
     
@@ -55,6 +58,8 @@ export class HomeComponent implements OnInit {
     error=>{console.error(error)}
     
     );
+
+    
   }
 
   consultarCalificacionesAlumno(idAlumno: number){

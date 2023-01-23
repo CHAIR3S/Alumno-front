@@ -4,9 +4,9 @@ import { Status } from './Status'
 
 export class Grupo{
 
-    id?: number;
-    grupo?: String;
-    estatus?: Status;
-    ciclo?: Ciclo;
+    id: number = 0;
+    grupo: string = '';
+    estatus: Status = new Status;
+    ciclo: Ciclo = new Ciclo;
 
 }
