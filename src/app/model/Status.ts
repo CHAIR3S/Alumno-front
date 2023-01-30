@@ -2,7 +2,7 @@
 
 export class Status{
 
-    id?: number;
-    estatus?: String;
+    id: number = 0;
+    estatus: string = '';
     
 }

@@ -2,7 +2,7 @@ import { ResponseGC } from 'src/app/model/ResponseGC';
 import { HomeComponent } from './../home/home.component';
 import { Alumno } from 'src/app/model/Alumno';
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
-import { Component, OnInit, OnChanges, Input, Host } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

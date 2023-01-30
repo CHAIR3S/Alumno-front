@@ -1,0 +1,54 @@
+table {
+  width: 100%;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+td,
+th {
+  width: 0;
+}
+
+.busqueda-filtro{
+  width: 95%;
+}
+
+i{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+#clear{
+  font-size: 25px;
+}
+
+#mostrar-todos{
+  font-size: 12px;
+  background-color: purple;
+  color: white;
+  width: 80%;
+  
+}
+
+.buttons{
+  height: 55%;
+}
+
+#add{
+  background-color: rgb(58, 235, 58);
+  color: white; 
+  font-size: 35px;
+  width: 70%;
+}

@@ -47,11 +47,12 @@
     height: 200;
     opacity: 1;
     pointer-events: none;
-    transition: all 0.5s ease;
+    transition: all 1.9s ease;
 }
 
 .active .logo_content .logo {
     opacity: 0;
+    transition: 0.2s ease;
     pointer-events: none;
 }
 

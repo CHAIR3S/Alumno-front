@@ -1,10 +1,8 @@
-import { ResponseGC } from 'src/app/model/ResponseGC';
-import { ProfesorService } from './../../../services/Profesor/profesor.service';
+
 import { Component, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { Profesor } from 'src/app/model/Profesor';
 import { UserData } from 'src/app/model/UserData';
 import { ProMatGruService } from 'src/app/services/ProMatGru/pro-mat-gru.service';
 import { ProMatGru } from 'src/app/model/ProMatGru';
@@ -60,7 +58,7 @@ export class TablaProfesoresComponent{
 
         if( this.arrayProMatGru[i].profesor != null ){
           if( this.arrayProMatGru[i].profesor.nombre != null ){
-            let nombre: string = this.arrayProMatGru[i].profesor.nombre + this.arrayProMatGru[i].profesor.apePaterno + this.arrayProMatGru[i].profesor.apeMaterno;
+            let nombre: string = this.arrayProMatGru[i].profesor.nombre + " " + this.arrayProMatGru[i].profesor.apePaterno + " " + this.arrayProMatGru[i].profesor.apeMaterno;
   
             userData.profesor = nombre;
           }
@@ -88,5 +86,5 @@ export class TablaProfesoresComponent{
     },
     error =>{ console.error(error)})
     
-  };
+  }
 }
