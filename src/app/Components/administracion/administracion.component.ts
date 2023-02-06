@@ -1,3 +1,5 @@
+import { ResponseGC } from 'src/app/model/ResponseGC';
+import { AlumnoFiltroDto } from './../../DTO/AlumnoFiltroDTO';
 import { DataSource } from '@angular/cdk/collections';
 import { Alumno } from './../../model/Alumno';
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
@@ -6,7 +8,6 @@ import { FormGroup, Validators } from '@angular/forms';
 
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlumnoData } from 'src/app/model/AlumnoData';
 import { OnInit } from '@angular/core';
@@ -37,9 +38,6 @@ export class AdministracionComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private alumnoService: AlumnoService) {
-
-    // this.consultarTodosAlumnos();
-
     
     this.dataSource = new MatTableDataSource(this.arrayUserData);
 
@@ -64,51 +62,88 @@ export class AdministracionComponent implements OnInit {
     event.target.value = event.target.value.toUpperCase();
   }
 
-  consultarTodosAlumnos() {
-    this.alumnoService.consultarTodos().subscribe(
+  consultarAlumno(){
+
+    const alumno: AlumnoFiltroDto = new AlumnoFiltroDto;
+    alumno.correo = this.form.value.correo;
+    alumno.expediente = this.form.value.expediente.toUpperCase();
+    alumno.curp = this.form.value.curp.toUpperCase();
+
+    this.alumnoService.buscarAlumnoFiltro(alumno).subscribe(
       (ResponseGC) => {
         this.arrayAlumnos = ResponseGC.list;
 
-        for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
-          let userData: AlumnoData = new AlumnoData();
-
-          if (this.arrayAlumnos[i].nombre != null) {
-            let nombre: string =
-              this.arrayAlumnos[i].nombre + ' ' +
-              this.arrayAlumnos[i].apePaterno + ' ' + 
-              this.arrayAlumnos[i].apeMaterno;
-
-            userData.alumno = nombre;
-          }
-
-          if (this.arrayAlumnos[i].expediente != null) {
-            userData.expediente = String(this.arrayAlumnos[i].expediente);
-          }
-
-          if (
-            this.arrayAlumnos[i].estatus != null &&
-            this.arrayAlumnos[i].estatus.estatus != null) {
-            userData.estatus = this.arrayAlumnos[i].estatus.estatus;
-          }
-
-          if (
-            this.arrayAlumnos[i].grupo != null &&
-            this.arrayAlumnos[i].grupo.grupo != null
-          ) {
-            userData.grupo = this.arrayAlumnos[i].grupo.grupo;
-          }
-
-          this.arrayUserData.push(userData);
-        }
-        
+        this.alumnoToArray();
 
         this.dataSource.paginator = this.paginator;
+        console.log(alumno);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+
+  }
+
+  consultarTodosAlumnos() {
+  
+    this.arrayUserData.length = 0;
+
+    this.alumnoService.consultarTodos().subscribe(
+      (ResponseGC) => {
+
+        this.arrayAlumnos = ResponseGC.list;
+
+        this.alumnoToArray();
+
+        setTimeout( () => {this.dataSource.paginator = this.paginator;}, 10)
         
       },
       (error) => {
         console.error(error);
       }
     );
+
+    console.log(this.arrayUserData);
+
+    
+  }
+
+  alumnoToArray(){
+
+    for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
+      let userData: AlumnoData = new AlumnoData();
+
+      if (this.arrayAlumnos[i].nombre != null) {
+        let nombre: string =
+          this.arrayAlumnos[i].nombre + ' ' +
+          this.arrayAlumnos[i].apePaterno + ' ' + 
+          this.arrayAlumnos[i].apeMaterno;
+
+        userData.alumno = nombre;
+      }
+
+      if (this.arrayAlumnos[i].expediente != null) {
+        userData.expediente = String(this.arrayAlumnos[i].expediente);
+      }
+
+      if (
+        this.arrayAlumnos[i].estatus != null &&
+        this.arrayAlumnos[i].estatus.estatus != null) {
+        userData.estatus = this.arrayAlumnos[i].estatus.estatus;
+      }
+
+      if (
+        this.arrayAlumnos[i].grupo != null &&
+        this.arrayAlumnos[i].grupo.grupo != null
+      ) {
+        userData.grupo = this.arrayAlumnos[i].grupo.grupo;
+      }
+
+      this.arrayUserData.push(userData);
+
+    }
   }
 
   
