@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ResponseGC } from 'src/app/model/ResponseGC';
 import { AlumnoFiltroDto } from './../../DTO/AlumnoFiltroDTO';
 import { DataSource } from '@angular/cdk/collections';
@@ -10,14 +11,13 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlumnoData } from 'src/app/model/AlumnoData';
-import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-administracion',
   templateUrl: './administracion.component.html',
   styleUrls: ['./administracion.component.scss'],
 })
-export class AdministracionComponent implements OnInit {
+export class AdministracionComponent {
   displayedColumns: string[] = [
     'expediente',
     'alumno',
@@ -37,7 +37,8 @@ export class AdministracionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder, 
-    private alumnoService: AlumnoService) {
+    private alumnoService: AlumnoService,
+    private http: HttpClient) {
     
     this.dataSource = new MatTableDataSource(this.arrayUserData);
 
@@ -50,10 +51,6 @@ export class AdministracionComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
-    
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -62,7 +59,14 @@ export class AdministracionComponent implements OnInit {
     event.target.value = event.target.value.toUpperCase();
   }
 
+  resetForm(){
+    this.form.reset();
+  }
+
   consultarAlumno(){
+
+    this.arrayUserData.length = 0;
+    this.dataSource.paginator = this.paginator;
 
     const alumno: AlumnoFiltroDto = new AlumnoFiltroDto;
     alumno.correo = this.form.value.correo;
@@ -75,20 +79,18 @@ export class AdministracionComponent implements OnInit {
 
         this.alumnoToArray();
 
-        this.dataSource.paginator = this.paginator;
-        console.log(alumno);
+        setTimeout( () => {this.dataSource.paginator = this.paginator;}, 10)
       },
       (error) => {
         console.error(error);
       }
     );
-
-
   }
 
   consultarTodosAlumnos() {
   
     this.arrayUserData.length = 0;
+    this.dataSource.paginator = this.paginator;
 
     this.alumnoService.consultarTodos().subscribe(
       (ResponseGC) => {
@@ -97,20 +99,19 @@ export class AdministracionComponent implements OnInit {
 
         this.alumnoToArray();
 
-        setTimeout( () => {this.dataSource.paginator = this.paginator;}, 10)
+        setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
         
       },
       (error) => {
         console.error(error);
       }
     );
-
-    console.log(this.arrayUserData);
-
-    
   }
 
   alumnoToArray(){
+
+    this.arrayUserData.length = 0;
+
 
     for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
       let userData: AlumnoData = new AlumnoData();
@@ -146,37 +147,8 @@ export class AdministracionComponent implements OnInit {
     }
   }
 
+
   
 }
 
 
-export interface PeriodicElement {
-  expediente: string;
-  alumno: string;
-  estatus: string;
-  grupo: string;
-}
-
-const arrayAl: PeriodicElement[] = [
-  {expediente: '1', alumno: 'Hydrogen', estatus: '1.0079', grupo: 'H'},
-  {expediente: '2', alumno: 'Helium', estatus: '4.0026', grupo: 'He'},
-  {expediente: '3', alumno: 'Lithium', estatus: '6.941', grupo: 'Li'},
-  {expediente: '4', alumno: 'Beryllium', estatus:' 9.0122', grupo: 'Be'},
-  {expediente: '5', alumno: 'Boron', estatus: '10.811', grupo: 'B'},
-  {expediente: '6', alumno: 'Carbon', estatus: '12.0107', grupo: 'C'},
-  {expediente: '7', alumno: 'Nitrogen', estatus: '14.0067', grupo: 'N'},
-  {expediente: '1', alumno: 'Hydrogen', estatus: '1.0079', grupo: 'H'},
-  {expediente: '2', alumno: 'Helium', estatus: '4.0026', grupo: 'He'},
-  {expediente: '3', alumno: 'Lithium', estatus: '6.941', grupo: 'Li'},
-  {expediente: '4', alumno: 'Beryllium', estatus:' 9.0122', grupo: 'Be'},
-  {expediente: '5', alumno: 'Boron', estatus: '10.811', grupo: 'B'},
-  {expediente: '6', alumno: 'Carbon', estatus: '12.0107', grupo: 'C'},
-  {expediente: '7', alumno: 'Nitrogen', estatus: '14.0067', grupo: 'N'},
-  {expediente: '1', alumno: 'Hydrogen', estatus: '1.0079', grupo: 'H'},
-  {expediente: '2', alumno: 'Helium', estatus: '4.0026', grupo: 'He'},
-  {expediente: '3', alumno: 'Lithium', estatus: '6.941', grupo: 'Li'},
-  {expediente: '4', alumno: 'Beryllium', estatus:' 9.0122', grupo: 'Be'},
-  {expediente: '5', alumno: 'Boron', estatus: '10.811', grupo: 'B'},
-  {expediente: '6', alumno: 'Carbon', estatus: '12.0107', grupo: 'C'},
-  {expediente: '7', alumno: 'Nitrogen', estatus: '14.0067', grupo: 'N'}
-];

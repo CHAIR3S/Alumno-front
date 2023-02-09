@@ -44,6 +44,7 @@ i{
 
 .buttons{
   height: 55%;
+  margin-bottom: 22px;
 }
 
 #add{
@@ -51,4 +52,19 @@ i{
   color: white; 
   font-size: 35px;
   width: 70%;
+}
+
+.tools{
+  font-size: 25px;
+  font-weight: 100;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+#edit{
+  color: #00aaf7;
+}
+
+#trash{
+  color: #ed0017;
 }
