@@ -1,3 +1,4 @@
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { TablaProfesoresComponent } from './Components/profesores/tabla-profesores/tabla-profesores.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -7,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'init',
+    component: SidebarComponent,
     loadChildren: () => import('./Components/interface.module').then(m => m.InterfaceModule )
   },
   {
