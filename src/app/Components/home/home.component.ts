@@ -30,8 +30,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     public alumnoService: AlumnoService,
-    private calificacionService: CalificacionService,
-    private profesorService: ProfesorService) { }
+    private calificacionService: CalificacionService) { }
 
   ngOnInit(): void {
     

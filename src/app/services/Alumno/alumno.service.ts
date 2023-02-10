@@ -16,28 +16,24 @@ import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
 export class AlumnoService {
 
   nombreUsuario: String = '';
-  res: boolean = true;
+  _res: boolean;
   arrayParams: Array<string> = new Array();
 
-  [x: string]: any;
-  private readonly API_URL = "assets/data/clients.json";
-  dialogData: any;
-  dataChange: BehaviorSubject<Alumno[]> = new BehaviorSubject<Alumno[]>([]);
-  isTblLoading = true;
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http:HttpClient) {
+    const storedData = localStorage.getItem('res');
+    this._res = storedData ? JSON.parse(storedData) : true;
   }
 
-  change(){
-    this.res = !this.res;
+  changeRes() {
+    this._res = !this._res;
+    localStorage.setItem('res', JSON.stringify(this._res));
   }
     
-  getDialogData() {
-    return this.dialogData;
-  }
 
   public consultarTodos():Observable<ResponseGC<Alumno>>{
     const url = "http://localhost:8081/alumno/consultarTodos";
@@ -78,13 +74,6 @@ export class AlumnoService {
     const url = "http://localhost:8081/alumno/buscarAlumnoFiltro?" + params; 
                                   //Url y body: objeto que contiene de lo que queremos crear
     return this.http.get<ResponseGC<Alumno>>(url)
-  }
-
-
-  
-
-  public get data(): Alumno[] {
-    return this.dataChange.value;
   }
 
   concatenar(filtro: AlumnoFiltroDto){

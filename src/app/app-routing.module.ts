@@ -6,16 +6,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home/:id',
-    component: HomeComponent
+    path: 'init',
+    loadChildren: () => import('./Components/interface.module').then(m => m.InterfaceModule )
   },
   {
-    path: 'admin',
-    component: AdministracionComponent
-  },
-  {
-    path: 'profesores',
-    component: TablaProfesoresComponent
+    path: '**',
+    redirectTo: 'init'
   }
 ];
 
