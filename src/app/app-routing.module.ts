@@ -1,7 +1,4 @@
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { TablaProfesoresComponent } from './Components/profesores/tabla-profesores/tabla-profesores.component';
-import { AdministracionComponent } from './Components/administracion/administracion.component';
-import { HomeComponent } from './Components/home/home.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

@@ -22,7 +22,9 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InterfaceRoutingModule } from './Components/interface-routing.module'
+import { InterfaceRoutingModule } from './Components/interface-routing.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { InterfaceRoutingModule } from './Components/interface-routing.module'
     AdministracionComponent,
     MateriasTablaComponent,
     TablaProfesoresComponent,
-    DisplayComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { InterfaceRoutingModule } from './Components/interface-routing.module'
     MatTooltipModule,
     ReactiveFormsModule,
     InterfaceRoutingModule,
+    MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

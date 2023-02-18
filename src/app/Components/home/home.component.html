@@ -1,4 +1,5 @@
 
+<div *ngIf="mostrar; else cargando">
     <div class="header">
         <span class="fullName">
             {{alumno.apePaterno}}
@@ -36,3 +37,8 @@
     <div class="grades">
         <app-materias-tabla [calificionesList] = "calificaciones"></app-materias-tabla>
     </div>
+</div>
+
+<ng-template #cargando>
+    <h1>Cargando...</h1>
+</ng-template>

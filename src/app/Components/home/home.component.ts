@@ -6,8 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ResponseGC } from '../../model/ResponseGC';
 import { Calificacion } from 'src/app/model/Calificacion';
-import { UserData } from '../../model/UserData';
-import { Profesor } from 'src/app/model/Profesor';
 
 
 @Component({
@@ -21,8 +19,7 @@ export class HomeComponent implements OnInit {
   calificaciones: Array <Calificacion> = new Array;
   alumno: Alumno = new Alumno;
   nombre: String = '';
-  arrayUserData: Array<UserData> = new Array();
-  arrayProfesores: Array<Profesor> = new Array();
+  mostrar: boolean = false;
 
   public id: any;
 
@@ -73,6 +70,7 @@ export class HomeComponent implements OnInit {
         this.calificaciones[contador].promedio =  this.promedioFuncion(cal1, cal2, cal3);
       }
       
+      this.mostrar = true;
     },
     error =>{ console.error(error)}
     );

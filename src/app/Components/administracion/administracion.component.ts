@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { ResponseGC } from 'src/app/model/ResponseGC';
+import { Router } from '@angular/router';
 import { AlumnoFiltroDto } from './../../DTO/AlumnoFiltroDTO';
-import { DataSource } from '@angular/cdk/collections';
 import { Alumno } from './../../model/Alumno';
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
 import { FormBuilder } from '@angular/forms';
@@ -27,6 +25,7 @@ export class AdministracionComponent {
   ];
   arrayAlumnos: Alumno[] = new Array();
   arrayUserData: AlumnoData[] = new Array();
+  load: boolean = false;
   
   dataSource!: MatTableDataSource<AlumnoData>;
   
@@ -38,8 +37,8 @@ export class AdministracionComponent {
   constructor(
     private fb: FormBuilder, 
     private alumnoService: AlumnoService,
-    private http: HttpClient) {
-    
+    private router: Router) {
+
     this.dataSource = new MatTableDataSource(this.arrayUserData);
 
     this.form = this.fb.group({
@@ -65,13 +64,23 @@ export class AdministracionComponent {
 
   consultarAlumno(){
 
+    this.load = true;
+
     this.arrayUserData.length = 0;
     this.dataSource.paginator = this.paginator;
 
     const alumno: AlumnoFiltroDto = new AlumnoFiltroDto;
-    alumno.correo = this.form.value.correo;
-    alumno.expediente = this.form.value.expediente.toUpperCase();
-    alumno.curp = this.form.value.curp.toUpperCase();
+    
+    if(this.form.value.correo != null){
+      alumno.correo = this.form.value.correo;
+    }
+    if(this.form.value.expediente != null ){
+
+      alumno.expediente = this.form.value.expediente.toUpperCase();
+    }
+    if(this.form.value.curp != null ){
+      alumno.curp = this.form.value.curp.toUpperCase();
+    }
 
     this.alumnoService.buscarAlumnoFiltro(alumno).subscribe(
       (ResponseGC) => {
@@ -80,15 +89,21 @@ export class AdministracionComponent {
         this.alumnoToArray();
 
         setTimeout( () => {this.dataSource.paginator = this.paginator;}, 10)
+        
+        this.load = false;
       },
       (error) => {
         console.error(error);
       }
     );
+
+
   }
 
   consultarTodosAlumnos() {
   
+    this.load = true;
+
     this.arrayUserData.length = 0;
     this.dataSource.paginator = this.paginator;
 
@@ -101,11 +116,18 @@ export class AdministracionComponent {
 
         setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
         
+        this.load = false;
       },
       (error) => {
         console.error(error);
       }
     );
+
+    
+  }
+
+  add() {
+    this.router.navigate(['init/edit']);
   }
 
   alumnoToArray(){
@@ -113,38 +135,43 @@ export class AdministracionComponent {
     this.arrayUserData.length = 0;
 
 
-    for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
-      let userData: AlumnoData = new AlumnoData();
+    if(this.arrayAlumnos != null){
 
-      if (this.arrayAlumnos[i].nombre != null) {
-        let nombre: string =
-          this.arrayAlumnos[i].nombre + ' ' +
-          this.arrayAlumnos[i].apePaterno + ' ' + 
-          this.arrayAlumnos[i].apeMaterno;
-
-        userData.alumno = nombre;
+      for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
+        let userData: AlumnoData = new AlumnoData();
+  
+        if (this.arrayAlumnos[i].nombre != null) {
+          let nombre: string =
+            this.arrayAlumnos[i].nombre + ' ' +
+            this.arrayAlumnos[i].apePaterno + ' ' + 
+            this.arrayAlumnos[i].apeMaterno;
+  
+          userData.alumno = nombre;
+        }
+  
+        if (this.arrayAlumnos[i].expediente != null) {
+          userData.expediente = String(this.arrayAlumnos[i].expediente);
+        }
+  
+        if (
+          this.arrayAlumnos[i].estatus != null &&
+          this.arrayAlumnos[i].estatus.estatus != null) {
+          userData.estatus = this.arrayAlumnos[i].estatus.estatus;
+        }
+  
+        if (
+          this.arrayAlumnos[i].grupo != null &&
+          this.arrayAlumnos[i].grupo.grupo != null
+        ) {
+          userData.grupo = this.arrayAlumnos[i].grupo.grupo;
+        }
+  
+        this.arrayUserData.push(userData);
+  
       }
-
-      if (this.arrayAlumnos[i].expediente != null) {
-        userData.expediente = String(this.arrayAlumnos[i].expediente);
-      }
-
-      if (
-        this.arrayAlumnos[i].estatus != null &&
-        this.arrayAlumnos[i].estatus.estatus != null) {
-        userData.estatus = this.arrayAlumnos[i].estatus.estatus;
-      }
-
-      if (
-        this.arrayAlumnos[i].grupo != null &&
-        this.arrayAlumnos[i].grupo.grupo != null
-      ) {
-        userData.grupo = this.arrayAlumnos[i].grupo.grupo;
-      }
-
-      this.arrayUserData.push(userData);
-
+      
     }
+    
   }
 
 

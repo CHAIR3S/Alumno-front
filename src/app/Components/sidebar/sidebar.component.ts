@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   response: ResponseGC<Alumno> = new ResponseGC();
   alumno: Alumno = new Alumno();
 
@@ -18,10 +18,6 @@ export class SidebarComponent implements OnInit {
     public route:ActivatedRoute,
     public alumnoService: AlumnoService) {}
 
-  ngOnInit(): void {
-    
-  
-  }
 
 
 }

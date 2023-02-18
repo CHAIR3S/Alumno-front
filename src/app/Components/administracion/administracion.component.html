@@ -16,9 +16,10 @@
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field appearance="outline" class="busqueda-filtro">
+        <mat-form-field appearance="outline" class="busqueda-filtro" >
           <mat-label>Correo</mat-label>
-          <input matInput autocomplete="off" formControlName="correo"/>
+          <input matInput autocomplete="off" formControlName="correo" placeholder="ittiva@example.com"/>
+          <mat-error *ngIf="form.invalid">Correo no válido</mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -63,12 +64,16 @@
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <button mat-raised-button id="add" class="buttons" matTooltip="Añadir alumno"
-        matTooltipPosition="above">
+        matTooltipPosition="above" (click)="add()">
           <i class="bx bx-user-plus"></i>
         </button>
       </mat-grid-tile>
     </mat-grid-list>
   
+</div>
+
+<div class="spinner" *ngIf="load">
+  <mat-spinner mode="indeterminate"></mat-spinner>
 </div>
 
 <div class="mat-elevation-z8" *ngIf="arrayUserData.length > 0">
@@ -98,13 +103,19 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <span>
-          <i class='bx bx-search-alt tools' id="look"></i>
+          <i class='bx bx-search-alt tools' id="look"
+          matTooltip="Ver alumno"
+          matTooltipPosition="above"></i>
         </span>
         <span>
-          <i class='bx bx-edit tools' id="edit"></i>
+          <i class='bx bx-edit tools' id="edit"
+          matTooltip="Editar alumno"
+          matTooltipPosition="above"></i>
         </span>
         <span>
-          <i class='bx bx-trash tools' id="trash"></i>
+          <i class='bx bx-trash tools' id="trash"
+          matTooltip="Eliminar alumno"
+          matTooltipPosition="above"></i>
         </span>
       </td>
     </ng-container>
@@ -121,6 +132,7 @@
   </mat-paginator>
 </div>
 
-<div class="no-users" *ngIf="arrayUserData.length == 0">
-  <h1>No hay usuarios para mostrar</h1>
+<div *ngIf="this.arrayUserData.length == 0; ">
+  <h1 *ngIf="!load">No hay usuarios para mostrar</h1>
 </div>
+

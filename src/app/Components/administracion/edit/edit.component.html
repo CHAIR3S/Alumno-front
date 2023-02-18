@@ -1,0 +1,70 @@
+<div>
+  <mat-grid-list cols="4" rowHeight="60px">
+    <form>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formEdit">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput autocomplete="off" formControlName="apePaterno"/>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="5"></mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formEdit">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput autocomplete="off" formControlName="apeMaterno">
+        </mat-form-field> 
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formEdit">
+          <mat-label>Nombre</mat-label>
+          <input matInput autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formEdit">
+          <mat-label>Correo</mat-label>
+          <input matInput autocomplete="off" type="text">
+        </mat-form-field> 
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field class="formEdit">
+          <mat-label>CURP</mat-label>
+          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field class="formEdit">
+          <mat-label>Expediente</mat-label>
+          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field class="formEdit">
+          <mat-label>Grupo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.grupo">{{grupo.grupo}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="formEdit">
+          <mat-label>Sexo</mat-label>
+          <mat-select>
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenido">Femenino</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="formEdit">
+          <mat-label>Estatus</mat-label>
+          <mat-select>
+            <mat-option value="1">Inactivo</mat-option>
+            <mat-option value="2">Activo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1"> 1 </mat-grid-tile>
+    </form>
+  </mat-grid-list>
+</div>

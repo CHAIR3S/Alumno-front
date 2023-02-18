@@ -31,6 +31,8 @@ export class TablaProfesoresComponent{
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.arrayUserData);
+
+    
   }
 
   ngAfterViewInit() {
@@ -81,7 +83,8 @@ export class TablaProfesoresComponent{
         this.arrayUserData.push(userData);
       }
 
-      this.dataSource.paginator = this.paginator;
+
+      setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
       
     },
     error =>{ console.error(error)})

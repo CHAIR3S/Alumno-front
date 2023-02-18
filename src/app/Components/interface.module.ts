@@ -2,13 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InterfaceRoutingModule } from './interface-routing.module';
+import { EditComponent } from './administracion/edit/edit.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    EditComponent
+  ],
   imports: [
     CommonModule,
-    InterfaceRoutingModule
+    InterfaceRoutingModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ]
 })
 export class InterfaceModule { }
