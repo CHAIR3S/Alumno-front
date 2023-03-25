@@ -1,11 +1,11 @@
+import { ResponseGC } from 'src/app/model/ResponseGC';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 
 import { HttpClient, HttpHeaders , HttpRequest,  HttpEvent, HttpParams} from '@angular/common/http';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 // import { UnsubscribeOnDestroyAdapter } from "../../toUse/UnsubscribeOnDestroyAdapter";
 import { Alumno } from '../../model/Alumno';
-import { ResponseGC } from "../../model/ResponseGC";
 import { AlumnoFiltroDto } from '../../DTO/AlumnoFiltroDTO';
 import { AlumnoDto } from '../../DTO/AlumnoDTO';
 import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
@@ -18,6 +18,10 @@ export class AlumnoService {
   nombreUsuario: String = '';
   _res: boolean;
   arrayParams: Array<string> = new Array();
+  dialog: boolean = false;
+  idAlumno: number = 0;
+  alumno: Alumno = new Alumno();
+  subject = new Subject<any>();
 
   
   httpOptions = {
@@ -33,7 +37,14 @@ export class AlumnoService {
     this._res = !this._res;
     localStorage.setItem('res', JSON.stringify(this._res));
   }
-    
+
+  sendEvent(){
+    this.subject.next(event);
+  }
+
+  getEvent(): Observable<any>{
+    return this.subject.asObservable();
+  }
 
   public consultarTodos():Observable<ResponseGC<Alumno>>{
     const url = "http://localhost:8081/alumno/consultarTodos";
@@ -51,6 +62,7 @@ export class AlumnoService {
   public guardarAlumno(alumno: AlumnoDto): Observable<ResponseGC<Alumno>> {
     const url = "http://localhost:8081/alumno/guardarAlumno"; 
                                   //Url y body: objeto que contiene de lo que queremos crear
+    // const body = JSON.stringify(alumno);
     return this.http.post<ResponseGC<Alumno>>(url, alumno)
   }
 
@@ -62,7 +74,7 @@ export class AlumnoService {
   }
   
   public eliminarAlumno(idAlumno: number): Observable<number> {
-    const url = "http://localhost:8081/alumno/borrarAlumnoId/" +  idAlumno;
+    const url = "http://localhost:8081/alumno/borrarAlumno/" +  idAlumno;
 
     return this.http.delete<number>(url);
   }

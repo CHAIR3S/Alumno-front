@@ -62,13 +62,16 @@ export class HomeComponent implements OnInit {
     this.calificacionService.buscarCalificacionAlumno(idAlumno).subscribe( ResponseGC => {
       this.calificaciones = ResponseGC.list;
 
-      for(let contador = 0; contador<this.calificaciones.length; contador++){
-        let cal1, cal2, cal3;
-        cal1 = this.calificaciones[contador].cal1;
-        cal2 = this.calificaciones[contador].cal2;
-        cal3 = this.calificaciones[contador].cal3;
-        this.calificaciones[contador].promedio =  this.promedioFuncion(cal1, cal2, cal3);
+      if(this.calificaciones != null){
+        for(let contador = 0; contador<this.calificaciones.length; contador++){
+          let cal1, cal2, cal3;
+          cal1 = this.calificaciones[contador].cal1;
+          cal2 = this.calificaciones[contador].cal2;
+          cal3 = this.calificaciones[contador].cal3;
+          this.calificaciones[contador].promedio =  this.promedioFuncion(cal1, cal2, cal3);
+        }
       }
+      
       
       this.mostrar = true;
     },

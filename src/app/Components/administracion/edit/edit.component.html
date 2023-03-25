@@ -1,64 +1,64 @@
 <div>
-  <mat-grid-list cols="4" rowHeight="60px">
+  <mat-grid-list cols="4" rowHeight="70px">
     <form [formGroup]="form">
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field appearance="fill" class="formEdit">
+        <mat-form-field appearance="outline" class="formEdit">
           <mat-label>Apellido Paterno</mat-label>
-          <input matInput autocomplete="off" formControlName="apePaterno"/>
+          <input matInput autocomplete="off" formControlName="apePaterno" [formControl]="apellidoPaternoInput" />
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="5">
         <i id="image" class='bx bx-user-circle'></i>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field appearance="fill" class="formEdit">
+        <mat-form-field appearance="outline" class="formEdit">
           <mat-label>Apellido Materno</mat-label>
-          <input matInput autocomplete="off" formControlName="apeMaterno">
+          <input matInput autocomplete="off" formControlName="apeMaterno" [formControl]="apellidoMaternoInput" />
         </mat-form-field> 
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field appearance="fill" class="formEdit">
+        <mat-form-field appearance="outline" class="formEdit">
           <mat-label>Nombre</mat-label>
-          <input matInput autocomplete="off" formControlName="nombre">
+          <input matInput autocomplete="off" formControlName="nombre" [formControl]="nombreInput" />
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field appearance="fill" class="formEdit">
+        <mat-form-field appearance="outline" class="formEdit">
           <mat-label>Correo</mat-label>
-          <input matInput autocomplete="off" type="text" formControlName="correo">
+          <input matInput autocomplete="off" type="text" formControlName="correo" [formControl]="correoInput">
         </mat-form-field> 
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field class="formEdit">
+        <mat-form-field class="formEdit" appearance="outline">
           <mat-label>CURP</mat-label>
-          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)" formControlName="curp">
+          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)" formControlName="curp" [formControl]="curpInput" />
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field class="formEdit">
+        <mat-form-field class="formEdit" appearance="outline">
           <mat-label>Expediente</mat-label>
-          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)" formControlName="expediente">
+          <input matInput type="text" autocomplete="off" (keyup)="onTextKeyup($event)" formControlName="expediente" [formControl]="expedienteInput" />
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
-        <mat-form-field class="formEdit">
+        <mat-form-field class="formEdit" appearance="outline">
           <mat-label>Grupo</mat-label>
           <mat-select formControlName="grupo">
-            <mat-option *ngFor="let grupo of grupos" [value]="grupo.grupo">{{grupo.grupo}}</mat-option>
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.grupo}}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field class="formEdit">
+        <mat-form-field class="formEdit" appearance="outline">
           <mat-label>Genero</mat-label>
           <mat-select formControlName="genero">
             <mat-option value="Masculino">Masculino</mat-option>
-            <mat-option value="Femenido">Femenino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-form-field class="formEdit">
+        <mat-form-field class="formEdit" appearance="outline">
           <mat-label>Estatus</mat-label>
           <mat-select formControlName="estatus">
             <mat-option value="1">Inactivo</mat-option>

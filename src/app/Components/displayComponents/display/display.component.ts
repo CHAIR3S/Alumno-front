@@ -12,6 +12,11 @@ export class DisplayComponent{
   constructor(
     public route:ActivatedRoute,
     public alumnoService: AlumnoService
-  ) { }
+  ) {  
+    alumnoService: AlumnoService
+  }
 
+  sendEvent(){
+    this.alumnoService.sendEvent();
+  }
 }

@@ -1,14 +1,13 @@
 export class AlumnoDto{
 
-    id?: number;
-	expediente?: string;
-	nombre?: string;
-	apePaterno?: string;
-	apeMaterno?: string;
-	curp?: string;
-	genero?: string;
-    correo?: string;
-	estatus?: string;
-	grupo?: string;
+	apeMaterno: string = '';
+	apePaterno: string = '';
+    correo: string = '';
+	curp: string = '';
+	estatus: string = '';
+	expediente: string = '';
+	genero: string = '';
+	grupo: string = '';
+	nombre: string = '';
 
 }

@@ -1,3 +1,4 @@
+import { ResponseGC } from './../../model/ResponseGC';
 import { Router } from '@angular/router';
 import { AlumnoFiltroDto } from './../../DTO/AlumnoFiltroDTO';
 import { Alumno } from './../../model/Alumno';
@@ -25,7 +26,8 @@ export class AdministracionComponent {
   ];
   arrayAlumnos: Alumno[] = new Array();
   arrayUserData: AlumnoData[] = new Array();
-  load: boolean = false;
+  load: boolean = false
+  idUsuario: number = 0;
   
   dataSource!: MatTableDataSource<AlumnoData>;
   
@@ -36,10 +38,14 @@ export class AdministracionComponent {
 
   constructor(
     private fb: FormBuilder, 
-    private alumnoService: AlumnoService,
+    public alumnoService: AlumnoService,
     private router: Router) {
 
     this.dataSource = new MatTableDataSource(this.arrayUserData);
+
+    this.alumnoService.getEvent().subscribe(() => {
+      this.aceptarBorrarAlumnoDialog()
+    });
 
     this.form = this.fb.group({
       expediente: [''],
@@ -58,8 +64,55 @@ export class AdministracionComponent {
     event.target.value = event.target.value.toUpperCase();
   }
 
+  aceptarBorrarAlumnoDialog() {
+
+    this.alumnoService.eliminarAlumno(this.idUsuario).subscribe( 
+       () => {
+
+         console.log('id borrado ' + this.idUsuario);
+
+         this.arrayAlumnos = this.borrarAlumnoArray(this.arrayAlumnos, this.idUsuario);
+
+         this.alumnoToArray();
+
+         setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
+         
+       },
+       (error) => {
+         console.error(error);
+       }
+    );
+
+    
+    this.alumnoService.dialog = false;
+  }
+
+  editarAlumno(id: number){
+
+    let alumno: Alumno[] = this.arrayAlumnos.filter( (arrayAlumnos) => {
+      return arrayAlumnos.id === id;
+    });
+
+    this.alumnoService.alumno = alumno[0];
+
+    this.router.navigate(['/init/edit']);
+
+    console.log(this.alumnoService.alumno);
+  }
+
+  borrarAlumnoArray(userArray: Alumno[], id: number){
+    return userArray.filter((userArray) => userArray.id !== id);
+  }
+
   resetForm(){
     this.form.reset();
+  }
+
+  borrarAlumnoDialog(id: number){
+
+    this.alumnoService.dialog = true;
+    
+    this.idUsuario = id;
   }
 
   consultarAlumno(){
@@ -84,6 +137,7 @@ export class AdministracionComponent {
 
     this.alumnoService.buscarAlumnoFiltro(alumno).subscribe(
       (ResponseGC) => {
+        
         this.arrayAlumnos = ResponseGC.list;
 
         this.alumnoToArray();
@@ -157,6 +211,10 @@ export class AdministracionComponent {
           this.arrayAlumnos[i].estatus != null &&
           this.arrayAlumnos[i].estatus.estatus != null) {
           userData.estatus = this.arrayAlumnos[i].estatus.estatus;
+        }
+
+        if (this.arrayAlumnos[i].id != null) {
+          userData.id = this.arrayAlumnos[i].id;
         }
   
         if (

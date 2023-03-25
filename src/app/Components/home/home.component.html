@@ -34,11 +34,19 @@
         </div>
     </div>
 
-    <div class="grades">
+    <div class="grades" *ngIf="calificaciones != null; else noMaterias">
         <app-materias-tabla [calificionesList] = "calificaciones"></app-materias-tabla>
     </div>
 </div>
 
+<ng-template #noMaterias>
+    <div id="calificaciones">
+        <h1>No hay materias por mostrar</h1>
+    </div>
+</ng-template>
+
 <ng-template #cargando>
-    <h1>Cargando...</h1>
+    <div id="cargando">
+        <h1>Cargando...</h1>
+    </div>
 </ng-template>

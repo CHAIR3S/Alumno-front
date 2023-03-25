@@ -101,7 +101,7 @@
 
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row">
+      <td mat-cell *matCellDef="let row; let i = index">
         <span>
           <i class='bx bx-search-alt tools' id="look"
           matTooltip="Ver alumno"
@@ -110,12 +110,14 @@
         <span>
           <i class='bx bx-edit tools' id="edit"
           matTooltip="Editar alumno"
-          matTooltipPosition="above"></i>
+          matTooltipPosition="above"
+          (click)="editarAlumno(row.id)"></i>
         </span>
         <span>
           <i class='bx bx-trash tools' id="trash"
           matTooltip="Eliminar alumno"
-          matTooltipPosition="above"></i>
+          matTooltipPosition="above"
+          (click)="borrarAlumnoDialog(row.id)"></i>
         </span>
       </td>
     </ng-container>
@@ -135,4 +137,6 @@
 <div *ngIf="this.arrayUserData.length == 0; ">
   <h1 *ngIf="!load">No hay usuarios para mostrar</h1>
 </div>
+
+
 
