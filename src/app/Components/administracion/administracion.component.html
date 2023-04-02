@@ -76,7 +76,7 @@
   <mat-spinner mode="indeterminate"></mat-spinner>
 </div>
 
-<div class="mat-elevation-z8" *ngIf="arrayUserData.length > 0">
+<div class="mat-elevation-z8" *ngIf="this.alumnoService.alumnoArray.length > 0">
   <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="expediente">
@@ -134,7 +134,7 @@
   </mat-paginator>
 </div>
 
-<div *ngIf="this.arrayUserData.length == 0; ">
+<div *ngIf="this.alumnoService.alumnoArray.length == 0; ">
   <h1 *ngIf="!load">No hay usuarios para mostrar</h1>
 </div>
 

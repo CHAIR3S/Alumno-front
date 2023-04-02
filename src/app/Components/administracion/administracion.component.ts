@@ -6,7 +6,7 @@ import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlumnoData } from 'src/app/model/AlumnoData';
@@ -24,8 +24,6 @@ export class AdministracionComponent {
     'grupo',
     'options'
   ];
-  arrayAlumnos: Alumno[] = new Array();
-  arrayUserData: AlumnoData[] = new Array();
   load: boolean = false
   idUsuario: number = 0;
   
@@ -41,7 +39,7 @@ export class AdministracionComponent {
     public alumnoService: AlumnoService,
     private router: Router) {
 
-    this.dataSource = new MatTableDataSource(this.arrayUserData);
+    this.dataSource = new MatTableDataSource(this.alumnoService.alumnoArray);
 
     this.alumnoService.getEvent().subscribe(() => {
       this.aceptarBorrarAlumnoDialog()
@@ -71,7 +69,7 @@ export class AdministracionComponent {
 
          console.log('id borrado ' + this.idUsuario);
 
-         this.arrayAlumnos = this.borrarAlumnoArray(this.arrayAlumnos, this.idUsuario);
+         this.alumnoService.arrayAlumnos = this.borrarAlumnoArray(this.alumnoService.arrayAlumnos, this.idUsuario);
 
          this.alumnoToArray();
 
@@ -89,15 +87,13 @@ export class AdministracionComponent {
 
   editarAlumno(id: number){
 
-    let alumno: Alumno[] = this.arrayAlumnos.filter( (arrayAlumnos) => {
+    let alumno: Alumno[] = this.alumnoService.arrayAlumnos.filter( (arrayAlumnos) => {
       return arrayAlumnos.id === id;
     });
 
     this.alumnoService.alumno = alumno[0];
 
     this.router.navigate(['/init/edit']);
-
-    console.log(this.alumnoService.alumno);
   }
 
   borrarAlumnoArray(userArray: Alumno[], id: number){
@@ -119,7 +115,7 @@ export class AdministracionComponent {
 
     this.load = true;
 
-    this.arrayUserData.length = 0;
+    this.alumnoService.alumnoArray.length = 0;
     this.dataSource.paginator = this.paginator;
 
     const alumno: AlumnoFiltroDto = new AlumnoFiltroDto;
@@ -138,7 +134,7 @@ export class AdministracionComponent {
     this.alumnoService.buscarAlumnoFiltro(alumno).subscribe(
       (ResponseGC) => {
         
-        this.arrayAlumnos = ResponseGC.list;
+        this.alumnoService.arrayAlumnos = ResponseGC.list;
 
         this.alumnoToArray();
 
@@ -158,13 +154,13 @@ export class AdministracionComponent {
   
     this.load = true;
 
-    this.arrayUserData.length = 0;
+    this.alumnoService.alumnoArray.length = 0;
     this.dataSource.paginator = this.paginator;
 
     this.alumnoService.consultarTodos().subscribe(
       (ResponseGC) => {
 
-        this.arrayAlumnos = ResponseGC.list;
+        this.alumnoService.arrayAlumnos = ResponseGC.list;
 
         this.alumnoToArray();
 
@@ -186,45 +182,45 @@ export class AdministracionComponent {
 
   alumnoToArray(){
 
-    this.arrayUserData.length = 0;
+    this.alumnoService.alumnoArray.length = 0;
 
 
-    if(this.arrayAlumnos != null){
+    if(this.alumnoService.arrayAlumnos != null){
 
-      for (let i: number = 0; i < this.arrayAlumnos.length; i++) {
+      for (let i: number = 0; i < this.alumnoService.arrayAlumnos.length; i++) {
         let userData: AlumnoData = new AlumnoData();
   
-        if (this.arrayAlumnos[i].nombre != null) {
+        if (this.alumnoService.arrayAlumnos[i].nombre != null) {
           let nombre: string =
-            this.arrayAlumnos[i].nombre + ' ' +
-            this.arrayAlumnos[i].apePaterno + ' ' + 
-            this.arrayAlumnos[i].apeMaterno;
+            this.alumnoService.arrayAlumnos[i].nombre + ' ' +
+            this.alumnoService.arrayAlumnos[i].apePaterno + ' ' + 
+            this.alumnoService.arrayAlumnos[i].apeMaterno;
   
           userData.alumno = nombre;
         }
   
-        if (this.arrayAlumnos[i].expediente != null) {
-          userData.expediente = String(this.arrayAlumnos[i].expediente);
+        if (this.alumnoService.arrayAlumnos[i].expediente != null) {
+          userData.expediente = String(this.alumnoService.arrayAlumnos[i].expediente);
         }
   
         if (
-          this.arrayAlumnos[i].estatus != null &&
-          this.arrayAlumnos[i].estatus.estatus != null) {
-          userData.estatus = this.arrayAlumnos[i].estatus.estatus;
+          this.alumnoService.arrayAlumnos[i].estatus != null &&
+          this.alumnoService.arrayAlumnos[i].estatus.estatus != null) {
+          userData.estatus = this.alumnoService.arrayAlumnos[i].estatus.estatus;
         }
 
-        if (this.arrayAlumnos[i].id != null) {
-          userData.id = this.arrayAlumnos[i].id;
+        if (this.alumnoService.arrayAlumnos[i].id != null) {
+          userData.id = this.alumnoService.arrayAlumnos[i].id;
         }
   
         if (
-          this.arrayAlumnos[i].grupo != null &&
-          this.arrayAlumnos[i].grupo.grupo != null
+          this.alumnoService.arrayAlumnos[i].grupo != null &&
+          this.alumnoService.arrayAlumnos[i].grupo.grupo != null
         ) {
-          userData.grupo = this.arrayAlumnos[i].grupo.grupo;
+          userData.grupo = this.alumnoService.arrayAlumnos[i].grupo.grupo;
         }
   
-        this.arrayUserData.push(userData);
+        this.alumnoService.alumnoArray.push(userData);
   
       }
       

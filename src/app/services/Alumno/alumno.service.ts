@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 // import { UnsubscribeOnDestroyAdapter } from "../../toUse/UnsubscribeOnDestroyAdapter";
 import { Alumno } from '../../model/Alumno';
+import { AlumnoData } from '../../model/AlumnoData';
 import { AlumnoFiltroDto } from '../../DTO/AlumnoFiltroDTO';
 import { AlumnoDto } from '../../DTO/AlumnoDTO';
 import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
@@ -22,11 +23,9 @@ export class AlumnoService {
   idAlumno: number = 0;
   alumno: Alumno = new Alumno();
   subject = new Subject<any>();
-
-  
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  alumnoArray: AlumnoData[] = new Array();
+  arrayAlumnos: Alumno[] = new Array();
+  guardarEditar= new Subject<any>();
 
   constructor(private http:HttpClient) {
     const storedData = localStorage.getItem('res');
@@ -44,6 +43,10 @@ export class AlumnoService {
 
   getEvent(): Observable<any>{
     return this.subject.asObservable();
+  }
+
+  sendGuardadActualizar(){
+    
   }
 
   public consultarTodos():Observable<ResponseGC<Alumno>>{

@@ -1,8 +1,6 @@
 import { FormControl } from '@angular/forms';
-import { Alumno } from './../../../model/Alumno';
-import { ResponseGC } from './../../../model/ResponseGC';
 import { GrupoService } from './../../../services/Grupo/grupo.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Grupo } from 'src/app/model/Grupo';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
@@ -20,13 +18,13 @@ export class EditComponent {
 
   grupos: Grupo[] = new Array;
   form: FormGroup;
-  alumno: Alumno = this.alumnoService.alumno;
-  apellidoPaternoInput = new FormControl(this.alumno.apePaterno);
-  apellidoMaternoInput = new FormControl(this.alumno.apeMaterno);
-  nombreInput = new FormControl(this.alumno.nombre);
-  correoInput = new FormControl(this.alumno.correo);
-  curpInput = new FormControl(this.alumno.curp);
-  expedienteInput = new FormControl(this.alumno.expediente);
+  apellidoPaternoInput;
+  apellidoMaternoInput;
+  nombreInput;
+  correoInput;
+  curpInput;
+  expedienteInput;
+  
 
   constructor(
     private fb: FormBuilder, 
@@ -47,10 +45,21 @@ export class EditComponent {
        estatus: [''],
        grupo: [''],
      });
+
+
+    this.apellidoPaternoInput = new FormControl(this.alumnoService.alumno.apePaterno);
+    this.apellidoMaternoInput = new FormControl(this.alumnoService.alumno.apeMaterno)
+    this.nombreInput = new FormControl(this.alumnoService.alumno.nombre)
+    this.correoInput = new FormControl(this.alumnoService.alumno.correo);
+    this.curpInput = new FormControl(this.alumnoService.alumno.curp);
+    this.expedienteInput = new FormControl(this.alumnoService.alumno.expediente);
+
+    this.form.get('genero')?.setValue(this.alumnoService.alumno.genero);
+    this.form.get('estatus')?.setValue(String(this.alumnoService.alumno.estatus.id));
+    this.form.get('grupo')?.setValue(this.alumnoService.alumno.grupo.id);
     
     
   }
-
   
   
   onTextKeyup(event: any) {
@@ -74,6 +83,7 @@ export class EditComponent {
 
     const alumno = new AlumnoDto;
 
+
     alumno.apePaterno = this.form.value.apePaterno;
     alumno.apeMaterno = this.form.value.apeMaterno;
     alumno.correo = this.form.value.correo;
@@ -86,7 +96,6 @@ export class EditComponent {
 
     this.alumnoService.guardarAlumno(alumno).subscribe( ResponseGC => {
       
-      console.log(alumno);
     })
 
   }
