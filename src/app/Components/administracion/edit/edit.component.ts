@@ -62,11 +62,6 @@ export class EditComponent{
         ?.setValue(String(this.alumnoService.alumno.estatus.id));
       this.form.get('grupo')?.setValue(this.alumnoService.alumno.grupo.id);
 
-
-      this.form.get('apePaterno')?.setValidators([Validators.required]);
-      this.form.get('apeMaterno')?.setValidators([Validators.required]);
-      this.form.get('nombre')?.setValidators([Validators.required]);
-      this.form.get('genero')?.setValidators([Validators.required]);
     }
 
 
