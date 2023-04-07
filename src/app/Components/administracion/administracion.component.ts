@@ -87,6 +87,7 @@ export class AdministracionComponent {
 
   editarAlumno(id: number){
 
+    
     let alumno: Alumno[] = this.alumnoService.arrayAlumnos.filter( (arrayAlumnos) => {
       return arrayAlumnos.id === id;
     });
@@ -94,6 +95,7 @@ export class AdministracionComponent {
     this.alumnoService.alumno = alumno[0];
 
     this.router.navigate(['/init/edit']);
+
   }
 
   borrarAlumnoArray(userArray: Alumno[], id: number){
@@ -177,6 +179,11 @@ export class AdministracionComponent {
   }
 
   add() {
+
+    const alumno: Alumno = new Alumno();
+
+    this.alumnoService.alumno = alumno;
+
     this.router.navigate(['init/edit']);
   }
 

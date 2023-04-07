@@ -13,7 +13,6 @@ export class DisplayComponent{
     public route:ActivatedRoute,
     public alumnoService: AlumnoService
   ) {  
-    alumnoService: AlumnoService
   }
 
   sendEvent(){

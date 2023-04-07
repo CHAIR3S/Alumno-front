@@ -45,10 +45,6 @@ export class AlumnoService {
     return this.subject.asObservable();
   }
 
-  sendGuardadActualizar(){
-    
-  }
-
   public consultarTodos():Observable<ResponseGC<Alumno>>{
     const url = "http://localhost:8081/alumno/consultarTodos";
     
