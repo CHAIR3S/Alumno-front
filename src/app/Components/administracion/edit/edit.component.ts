@@ -32,19 +32,17 @@ export class EditComponent{
   constructor(
     private fb: FormBuilder, 
     private router: Router,
-    private grupoService: GrupoService,
+    public grupoService: GrupoService,
     private alumnoService: AlumnoService) {
 
-      this.consultarGrupos();
-
       this.form = this.fb.group({
-        apePaterno: ['', Validators.required],
-        apeMaterno: ['', Validators.required],
-        nombre: ['', Validators.required],
+        apePaterno: [''],
+        apeMaterno: [''],
+        nombre: [''],
         correo: [''],
         curp: [''],
         expediente: [''],
-        genero: ['', Validators.required],
+        genero: [''],
         estatus: [''],
         grupo: [''],
       });
@@ -64,24 +62,16 @@ export class EditComponent{
         ?.setValue(String(this.alumnoService.alumno.estatus.id));
       this.form.get('grupo')?.setValue(this.alumnoService.alumno.grupo.id);
 
+
+      this.form.get('apePaterno')?.setValidators([Validators.required]);
+      this.form.get('apeMaterno')?.setValidators([Validators.required]);
+      this.form.get('nombre')?.setValidators([Validators.required]);
+      this.form.get('genero')?.setValidators([Validators.required]);
     }
 
 
     onTextKeyup(event: any) {
       event.target.value = event.target.value.toUpperCase();
-    }
-
-    consultarGrupos(){
-      this.grupoService.consultarTodos().subscribe(
-        (ResponseGC) => {
-      
-          this.grupos = ResponseGC.list;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-
     }
 
     aceptar(){

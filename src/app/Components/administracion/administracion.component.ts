@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { ResponseGC } from './../../model/ResponseGC';
 import { Router } from '@angular/router';
 import { AlumnoFiltroDto } from './../../DTO/AlumnoFiltroDTO';
@@ -10,13 +11,14 @@ import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlumnoData } from 'src/app/model/AlumnoData';
+import { GrupoService } from 'src/app/services/Grupo/grupo.service';
 
 @Component({
   selector: 'app-administracion',
   templateUrl: './administracion.component.html',
   styleUrls: ['./administracion.component.scss'],
 })
-export class AdministracionComponent {
+export class AdministracionComponent implements OnInit{
   displayedColumns: string[] = [
     'expediente',
     'alumno',
@@ -37,6 +39,7 @@ export class AdministracionComponent {
   constructor(
     private fb: FormBuilder, 
     public alumnoService: AlumnoService,
+    private grupoService: GrupoService,
     private router: Router) {
 
     this.dataSource = new MatTableDataSource(this.alumnoService.alumnoArray);
@@ -52,6 +55,10 @@ export class AdministracionComponent {
     });
     
     
+  }
+
+  ngOnInit(): void {
+      this.consultarGrupos();
   }
 
   ngAfterViewInit() {
@@ -176,6 +183,19 @@ export class AdministracionComponent {
     );
 
     
+  }
+
+  consultarGrupos(){
+    this.grupoService.consultarTodos().subscribe(
+      (ResponseGC) => {
+    
+        this.grupoService.grupos = ResponseGC.list;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
   }
 
   add() {
